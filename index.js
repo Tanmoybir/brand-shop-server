@@ -57,7 +57,7 @@ async function run() {
       const result = await brandsCollection.insertOne(newProducts);
       res.send(result);
     })
-
+no
     app.put('/brands/:id', async (req, res) => {
       const id = req.params.id;
       console.log(id);
@@ -83,12 +83,13 @@ async function run() {
     })
 
     app.get('/myCarts', async (req, res) => {
-      // let query = {}
-      // const queryEmail = res.query.email
-      // if (queryEmail) {
-      //   query.email = queryEmail
-      // }
-      const cursor = myCartCollection.find()
+      let query = {}
+      const email = req.query.email
+      // console.log(email);
+      if (email) {
+        query.email = email
+      }
+      const cursor = myCartCollection.find(query)
       const result = await cursor.toArray()
       res.send(result)
     })
